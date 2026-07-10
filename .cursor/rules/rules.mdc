@@ -1,0 +1,51 @@
+# Universal Rules
+.github/instructions/universal.instructions.md
+
+# Commands and Obedience
+.github/instructions/commands-and-obedience.instructions.md
+
+# Tools and MCPs
+.github/instructions/tools-and-mcps.instructions.md
+
+# Function Composition
+.github/instructions/composition.instructions.md
+
+# Dependency Injection
+.github/instructions/dependency-injection.instructions.md
+
+# Change & Discovery Process
+.github/instructions/discovery.instructions.md
+
+# Error Handling
+.github/instructions/error-handling.instructions.md
+
+# Factories 
+.github/instructions/factory.instructions.md
+
+# Fidelity Requirements & Shortcut Ban
+.github/instructions/fidelity.instructions.md
+
+# Linting & Proof
+.github/instructions/linting.instructions.md
+
+# Logging
+.github/instructions/logging.instructions.md
+
+# Work Loop Structure: Read → Analyze → Explain → Propose → (Edit → Lint →) Halt
+.github/instructions/loop.instructions.md
+
+# Builder vs Reviewer Modes
+.github/instructions/mode.instructions.md
+
+# TDD & Dependency Ordering
+.github/instructions/ordering.instructions.md
+
+# Testing Behavior
+.github/instructions/testing.instructions.md
+
+# Strict Typing & Object Composition
+.github/instructions/typing.instructions.md
+
+# Workplan Structure
+.github/instructions/workplan.instructions.md
+
