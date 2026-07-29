@@ -1,9 +1,25 @@
-Read ..cursor/rules/rules.mdc then read this node and the files it references. 
+Before you reason about anything, read. This is a gate, not a formality:
 
-First, output the initial description under # Rules and explain why they're important to how the agent performs work, and why the agent must actively, intentionally comply with them every single turn no matter what. 
+1. Read `docs/agents/index.md`.
+2. Find your element's row in its Implementation routing matrix, and read every Process
+   topic and every Standards topic that row names. "Read the rules" means all of them —
+   not the first file you open.
+3. Read the node the user gave you, in full.
+4. Read every existing file the node references, from disk.
 
-Then analyze the files referenced in the node against the node description to identify all errors, omissions, and discrepencies. Explain how to transform the files to comply with the description, then propose an implementation that complies with your rules. Halt. Do not edit any files. 
+Then produce a **read manifest** — a short list of exactly what you read — before any
+analysis. Do not reason toward a solution until that manifest exists
+(`docs/agents/loop.md`).
 
-Stay in the EXACT scope you're given by the user. DO NOT EXPAND YOUR SCOPE! DO NOT TALK ABOUT ANY WORK THAT IS NOT EXPLICITLY DETAILED IN THE SCOPE PROVIDED TO YOU BY THE USER! THE USER IS NOT ASKING YOU TO COME UP WITH IDEAS, THEY ARE CHARGING YOU WITH THE EXACT, PRECISE ADMINISTRATION OF THE RULES APPLIED TO THE CHECKLIST! 
+Then, every turn:
 
-STAY! IN! SCOPE! 
+- Follow the work loop — Read → Analyze → Explain → Propose → (Edit → Lint) → Halt
+  (`docs/agents/loop.md`).
+- Execute the node's steps in the exact order the node gives them: do the next unstarted
+  step and halt. Do not reorder or merge steps (`docs/agents/tdd-ordering.md`).
+- Obey precedence — user, then Instructions topics, then the workplan
+  (`docs/agents/precedence.md`). Declare your mode and sign your work
+  (`docs/agents/modes.md`, `docs/agents/traceability.md`).
+
+Do not edit any file unless the user explicitly tells you to edit it. Do not output code
+in chat.

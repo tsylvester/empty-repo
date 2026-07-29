@@ -1,7 +1,9 @@
-Now write the guards to satisfy the guard tests. Follow the work plan descriptions exactly. 
+Write the guards for the current node's interface, exactly as the node describes.
 
-Guards only test the types that are owned by the interface. Guards do not guard types imported from other interfaces! 
+One guard per owned type. For an imported-typed property, call the imported guard —
+never inline or re-author it. If a needed guard is missing, search the predicate
+`is SomeType`; if it is truly absent, halt and report.
 
-Guards guard every type in the interface - the function elements, plus any objects produced by the function. 
+Conforms to: `docs/agents/guards.md`.
 
-Imported types are guarded BY THEIR OWN GUARDS IN THEIR HOME PACKAGE. 
+Do only the guards. Follow `docs/agents/loop.md` and `docs/agents/precedence.md`.
