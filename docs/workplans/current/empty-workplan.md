@@ -10,7 +10,7 @@
 ## Expected Outcome
 
 # Instructions for Agent
-* `.github/instructions/*.instructions.md` for repo standards and requirements.
+* `docs/agents/index.md` for repo standards and requirements (the topic index).
 * `.cursor/commands/*.prompt.md` for task-specific direction. 
 
 # Work Breakdown Structure
