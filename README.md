@@ -47,6 +47,7 @@ CLAUDE.md                            harness adapters — each one just points t
 AGENTS.md                              at docs/agents/index.md, so every harness reads
 .github/copilot-instructions.md        the same rules
 .cursor/rules/rules.mdc
+.windsurf/rules/agent-instructions.md
 ```
 
 ## Supported harnesses
@@ -57,6 +58,8 @@ AGENTS.md                              at docs/agents/index.md, so every harness
 | Codex / OpenAI agents | `AGENTS.md` |
 | GitHub Copilot | `.github/copilot-instructions.md` |
 | Cursor | `.cursor/rules/rules.mdc` (+ `.cursor/commands/` for slash commands) |
+| Windsurf | `.windsurf/rules/agent-instructions.md` |
+| Devin | `AGENTS.md` |
 
 Each adapter is a three-line pointer to `docs/agents/index.md`. Any other agent that can
 read a project file works too — point it at the index.

@@ -15,177 +15,85 @@
 
 # Work Breakdown Structure
 
+Write each element in the fixed dependency order below — do not reorder or merge them, and
+omit an element only when the work does not touch its concern. Before writing an element,
+obey the topics that govern it — its `Conforms to:` list in
+`docs/agents/workplan-structure.md` and the routing matrix in `docs/agents/index.md` — but
+do not print those citations into the plan; they are authoring guidance, not node content.
+Name groupings by their dependency role; never number them.
+
 * **TITLE OF SPRINT** 
 
 ## Name of Workstream 
+
 * `[ ]`   `[path]/[function]` **Descriptive explanatory title**
 
   * `[ ]`   `objective`
     * `[ ]`   Define the *problem being solved* (not the solution)
-    * `[ ]`   Separate:
-      * Functional goals (what must happen)
-      * Non-functional constraints (performance, reliability, etc.)
+    * `[ ]`   Separate functional goals (what must happen) from non-functional constraints
     * `[ ]`   Each goal is atomic and testable
 
   * `[ ]`   `role`
-    * `[ ]`   Declare the node’s role in the system (domain/app/port/adapter/infra)
-    * `[ ]`   Explain *why this role is appropriate*
-    * `[ ]`   Identify what this node must NOT do (out-of-scope responsibilities)
+    * `[ ]`   Declare the node's role (domain/app/port/adapter/infra) and why it is appropriate
+    * `[ ]`   Identify what this node must NOT do
 
   * `[ ]`   `module`
-    * `[ ]`   Define the bounded context this node belongs to
-    * `[ ]`   List what concepts/data belong inside vs outside this boundary
-    * `[ ]`   Each boundary rule is explicit and reviewable
+    * `[ ]`   Define the bounded context; what concepts/data belong inside vs outside
 
   * `[ ]`   `deps`
-    * `[ ]`   For each dependency:
-      * Provider (node or external package)
-      * Layer classification
-      * Direction (why allowed)
-      * Purpose (what capability is needed)
-    * `[ ]`   Confirm:
-      * No reverse dependencies
-      * No lateral layer violations
+    * `[ ]`   For each dependency: provider, layer, direction (why allowed), purpose
+    * `[ ]`   Confirm no reverse dependencies and no lateral layer violations
 
   * `[ ]`   `context_slice`
-    * `[ ]`   Define the **minimal interface required** from each dependency
-    * `[ ]`   Specify injection shape (pure interface, no concrete types)
-    * `[ ]`   Confirm:
-      * No over-fetching of dependency surface
-      * No hidden coupling
+    * `[ ]`   The minimal interface required from each dependency; injection shape (pure interface)
 
-  * `[ ]`   `function.interface.test.ts`
-    * `[ ]`   Define:
-      * Valid cases (must pass)
-      * Invalid cases (must fail)
-    * `[ ]`   Include edge cases and boundary values
-    * `[ ]`   Define invariants (e.g., “id must be non-empty”)
-    * `[ ]`   No implementation details — pure expectation
+  * `[ ]`   `[function].interface.test.ts`
+    * `[ ]`   Prove the contract by typed assignment: type membership, return-union arms and flavors, invariants
 
-  * `[ ]`   `function.interface.ts`
-    * `[ ]`   Define:
-      * Input types
-      * Output types
-      * Error types (explicitly)
-    * `[ ]`   No implicit/any types unless explicitly justified
-    * `[ ]`   Each type is minimal and composable
+  * `[ ]`   `[function].interface.ts`
+    * `[ ]`   Declare the signature: deps, params, payload, and the Success | Error return union
 
-  * `[ ]`   `function.interaction.spec`
-    * `[ ]`   Define:
-      * Expected call patterns (who calls this, how)
-      * Required dependency interactions
-    * `[ ]`   For each interaction:
-      * Input → output expectation
-      * Side effects (if any)
-    * `[ ]`   Define failure modes:
-      * What errors occur
-      * Under what conditions
-    * `[ ]`   Define ordering/temporal constraints (if applicable)
-    * `[ ]`   No code — purely declarative
-
-  * `[ ]`   `[function].guard.test.ts`
-    * `[ ]`   Verify guards against contract tests
-    * `[ ]`   Ensure:
-      * No false positives
-      * No false negatives
-
-  * `[ ]`   `[function].guard.ts`
-    * `[ ]`   Implement guards for each interface type
-    * `[ ]`   Guards must:
-      * Accept all valid contract cases
-      * Reject all invalid contract cases
+  * `[ ]`   `[function].interaction.spec`
+    * `[ ]`   Declare the branch contract — per branch: condition, decision, dependency call, and the exact return-union outcome; plus side effects and ordering. Declarative, no code
 
   * `[ ]`   `[function].mock.ts`
-    * `[ ]`   Provide controllable implementations of:
-      * All external interactions
-    * `[ ]`   Must conform to:
-      * interface
-      * interaction.spec
-    * `[ ]`   No new behavior introduced beyond spec
+    * `[ ]`   Provide the builders, invalidators, and function mocks this interface owns (before the guard test consumes them)
+
+  * `[ ]`   `[function].guard.test.ts`
+    * `[ ]`   Prove each owned guard: no false positives, no false negatives (the case checklist)
+
+  * `[ ]`   `[function].guard.ts`
+    * `[ ]`   Implement each owned guard
 
   * `[ ]`   `[function].test.ts`
-    * `[ ]`   Validate behavior against:
-      * `requirements`
-      * `interaction.spec`
-    * `[ ]`   Each checklist item validates:
-      * Proof that a specific behavioral contract is upheld positively
-      * Proof that a specific behavioral contract is not violated negatively
-    * `[ ]`   Focus on:
-      * Correct transformations
-      * Correct branching logic
-    * `[ ]`   Do NOT re-test:
-      * Type shape
-      * Guard correctness
+    * `[ ]`   Validate transformations and branching against requirements and the interaction spec
+    * `[ ]`   Do NOT re-test type shape or guard correctness
 
-  * `[ ]`   `[function].someOther.test.ts` 
-    * Some functions have multiple test files. 
-    * In such case, include every test file that must be updated in the node detail. 
-    * Test files are generally broken apart when there are large sets of tests for different behaviors.
-    * Separate test files generally group similar functional contracts.
-    * Having numerous test files is a good signal that the function needs to be decomposed. 
+  * `[ ]`   `[function].someOther.test.ts`
+    * `[ ]`   If the function has multiple test files, include every one that must be updated. Many test files signal the function should be decomposed
 
   * `[ ]`   `construction`
-    * `[ ]`   Define:
-      * Factory/constructor entrypoints
-      * Required dependencies at creation
-    * `[ ]`   Enforce:
-      * No partially constructed instances
-    * `[ ]`   Declare invalid construction contexts
-    * `[ ]`   Define initialization order (if needed)
+    * `[ ]`   Factory/constructor entrypoints; required deps at creation; no partially constructed instances
 
   * `[ ]`   `[function].ts`
-    * `[ ]`   Implement behavior defined in:
-      * `requirements`
-      * `interaction.spec`
-    * `[ ]`   Must not:
-      * Introduce undeclared dependencies
-      * Bypass guards or contracts
-    * `[ ]`   Each requirement maps to code paths
+    * `[ ]`   Implement the behavior from requirements and the interaction spec
+    * `[ ]`   Introduce no undeclared dependencies; bypass no guards or contracts
 
   * `[ ]`   `[function].provides.ts`
-    * `[ ]`   Declare:
-      * All exported symbols
-      * Public API surface
-    * `[ ]`   Define:
-      * Stability guarantees
-      * Semantic guarantees
-    * `[ ]`   Enforce:
-      * No external access bypasses this file
+    * `[ ]`   Export the public surface: interfaces, guards, functions, mocks
 
   * `[ ]`   `[function].integration.test.ts`
-    * `[ ]`   Not every node has an integration test.
-      *    Do not specify an integration test until an integration boundary is reached. 
-      *    The integration test must use the real functions and only mock at the boundary of the chain. 
-    * `[ ]`   Validate:
-      * provider → function
-      * function → consumer
-      * full chain interactions
-    * `[ ]`   Use mocks only for external nodes, do not mock any function within the chain.
-      * If a function in the chain has a side-effect that reaches outside the codebase (like making an external API call) you may need to stub that call so it does not leave the codebase. 
+    * `[ ]`   Only when an integration boundary is reached. Validate provider → function → consumer; use the real functions in the chain and mock only at the outer boundary
 
   * `[ ]`   `directionality`
-    * `[ ]`   Declare node layer
-    * `[ ]`   Confirm:
-      * deps are inward-facing
-      * provides are outward-facing
-    * `[ ]`   No cycles unless explicitly justified
+    * `[ ]`   Confirm deps inward, provides outward, no unjustified cycles
 
   * `[ ]`   `requirements`
-    * `[ ]`   Define acceptance criteria (binary pass/fail)
-    * `[ ]`   Each requirement:
-      * Is observable
-      * Is testable
-      * Maps to tests
+    * `[ ]`   Binary, observable, testable acceptance criteria, each mapped to a test
 
   * `[ ]`   **Commit** `[type] [scope] [summary]`
-    * `[ ]`   Not every node has a Commit step, Commit steps generally come at a sprint boundary where the new feature is built and integrated. 
-    * `[ ]`   Never add Commit steps if the function is not buildable yet. 
-    * `[ ]`   The new feature may not be fully integrated at a Commit step, that is fine. 
-    * `[ ]`   List structural changes
-    * `[ ]`   List behavioral changes
-    * `[ ]`   List contract changes
+    * `[ ]`   Only at a working boundary; never when the function is not buildable. List structural, behavioral, and contract changes
 
 # To-Do List
 
 ## Name of deferred work item
-
