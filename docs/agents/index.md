@@ -24,6 +24,7 @@ to this index.
 - [output](output.md) — no code in chat, no unbidden writes, safe edit boundaries
 - [fidelity](fidelity.md) — no whole-file rewrites, preserve behavior on refactor, no unrequested renames
 - [environment](environment.md) — tools / MCPs, language-server, worktrees, never run tests
+- [terminal-policy](terminal-policy.md) — terminal denied by default; two-gate allowlist; per-env enforcement
 - [linting-proof](linting-proof.md) — lint after edit, no silencing, linter error = RED proof
 - [logging](logging.md) — debug by logging, believe failures literally
 
