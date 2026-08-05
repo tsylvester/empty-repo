@@ -24,7 +24,6 @@ to this index.
 - [output](output.md) — no code in chat, no unbidden writes, safe edit boundaries
 - [fidelity](fidelity.md) — no whole-file rewrites, preserve behavior on refactor, no unrequested renames
 - [environment](environment.md) — tools / MCPs, language-server, worktrees, never run tests
-- [terminal-policy](terminal-policy.md) — terminal denied by default; two-gate allowlist; per-env enforcement
 - [linting-proof](linting-proof.md) — lint after edit, no silencing, linter error = RED proof
 - [logging](logging.md) — debug by logging, believe failures literally
 
@@ -37,7 +36,7 @@ to this index.
 - [dependency-injection](dependency-injection.md) — DI at the boundary, context factory
 - [mocks](mocks.md) — builders, invalidators, function mocks
 - [guards](guards.md) — guard everything, authorship, boundary litmus
-- [tests](tests.md) — test authoring; anchors `#interface` `#guard` `#unit` `#integration` `#e2e`
+- [tests](tests.md) — test authoring, contract headers, derangement audit; anchors `#interface` `#guard` `#unit` `#integration` `#e2e` `#audit`
 - [errors-and-returns](errors-and-returns.md) — `Success | Error` handling
 - [boundaries](boundaries.md) — provides / barrels, directionality
 
