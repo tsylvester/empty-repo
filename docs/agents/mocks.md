@@ -34,8 +34,37 @@ Do **not** mock:
 - objects owned by another interface
 - wrappers around another interface's mock
 
-Imported types are mocked by their own home package — locate and use those (search
-for `buildSomeType`); if none exists, halt and report per [discovery-halt](discovery-halt.md).
+Imported types are mocked by their own home package — locate and use existing mocks.
+Never assume you know the name of the mock; the **type declaration** of the mock is the
+invariant that locates it. If no mock for the type exists, halt and report per
+[discovery-halt](discovery-halt.md).
+
+### Locating an existing mock
+
+The general rule and its three outcomes are owned by
+[tdd-ordering](tdd-ordering.md#search-the-invariant-never-the-convention) — search the
+structural invariant, never the name or the folder, because those describe where the
+codebase is going and not the code you are searching. This section names the invariant for
+each kind of mock.
+
+- **Builder** — it returns the production type. `SomeType` in the return position is the
+  invariant, whatever the function is called and wherever it lives.
+- **Function mock** — it *is* the production function type, so its type annotation is the
+  invariant: a value declared `: SomeFn`.
+- **Invalidator** — it returns `unknown` by mandate, so **its signature ties it to
+  nothing**. There is no invariant to search on. Find the builder first, then read the file
+  the builder turned out to live in — and do not assume that file is beside the interface,
+  or that it holds an invalidator at all.
+
+An invalidator that does not exist is the second outcome in
+[tdd-ordering](tdd-ordering.md#three-outcomes-and-only-one-of-them-is-create-it), not the
+third: the mock file exists and is missing a symbol, which is another file's edit and so a
+discovery. Do not write the invalidator into a foreign mock file, and do not substitute a
+cast or a hand-rolled malformed object for the one that is missing.
+
+A mock found under a non-compliant name, or in an unexpected file, is still the mock. Use
+it and record the debt; a second, correctly-named copy beside it is duplication, which is
+forbidden below.
 
 ## Which mock does an owned symbol get?
 
