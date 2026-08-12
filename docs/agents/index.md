@@ -21,6 +21,7 @@ Single source of truth for how agents work in this repo. Every rule lives in exa
 - [terminal-policy](terminal-policy.md) — terminal denied by default; two-gate allowlist; per-env enforcement
 - [linting-proof](linting-proof.md) — lint after edit, no silencing, linter error = RED proof
 - [logging](logging.md) — debug by logging, believe failures literally
+- [insanity-loop](insanity-loop.md) — break repetitive failure and recover by starting over
 
 ## Standards topics — govern file content
 
