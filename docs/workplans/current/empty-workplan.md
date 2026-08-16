@@ -10,8 +10,11 @@
 ## Expected Outcome
 
 # Instructions for Agent
-* `docs/agents/index.md` for repo standards and requirements (the topic index).
-* `.cursor/commands/*.prompt.md` for task-specific direction. 
+* The user is the highest authority, then the rules, then the workplan.
+* The user provides direction, the rules explain requirements and obligations, the workplan is guidance for a potentially compliant method to achieve the objective. 
+* Never obey the workplan if it contradicts the user or rules. 
+* Read `docs/agents/index.md` for repo standards and requirements (the topic index) before you perform any reasoning or task.
+* Read `.cursor/commands/*.prompt.md` for task-specific direction. 
 
 # Work Breakdown Structure
 
